@@ -1,0 +1,12 @@
+{
+  "name": "nomad-flats",
+  "version": "1.0.0",
+  "description": "A medium-term housing platform by nomads, for nomads.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Nicole Abramowski",
+  "license": "ISC"
+}
