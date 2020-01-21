@@ -8,14 +8,14 @@ const PORT = 3000;
 //  handle parsing request body
 app.use(bodyParser.json());
 
+app.use('/build', express.static(path.join(__dirname, '../build')));
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.get('/build/bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build/bundle.js'));
-});
-
-app.use(express.static('build'));
+// app.get('/build/bundle.js', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/bundle.js'));
+// });
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
