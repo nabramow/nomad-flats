@@ -13,4 +13,5 @@ class App extends Component {
       <div>App div has returned</div>,
       document.querySelector('#flats')
     );
-  };
+  }
+}
