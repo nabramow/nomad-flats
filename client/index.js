@@ -20,7 +20,10 @@ class AddFlat extends React.Component {
     super(props, context);
     this.state = {
       startdate: '',
-      enddate: ''
+      enddate: '',
+      country: '',
+      stateLoc: '',
+      city: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,6 +40,9 @@ class AddFlat extends React.Component {
       let reqBody = {
         startdate: this.state.startdate,
         enddate: this.state.enddate,
+        country: this.state.country,
+        stateLoc: this.state.stateLoc,
+        city: this.state.city
       };
       fetch('/submit', {
         method: 'POST',
@@ -64,19 +70,21 @@ class AddFlat extends React.Component {
           <h2>Add a flat</h2>
           <br></br>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" name="startdate" key="startdate" placeholder="Start Date" value={this.state.startdate} onChange={this.handleChange}></input>
-            <input type="text" name="enddate" key="enddate" placeholder="End Date" value={this.state.enddate} onChange={this.handleChange}></input>
-            {/* <select name="country" className="countries" id="countryId">
-            <option value="">Select Country</option>
+            <label for="startdate">Start date:</label>
+            <input type="date" name="startdate" value={this.state.startdate} onChange={this.handleChange}></input>
+            <label for="enddate">End date:</label>
+            <input type="date" name="enddate" value={this.state.enddate} onChange={this.handleChange}></input>
+            <select name="country" className="countries" id="countryId" value={this.state.country} onChange={this.handleChange}>
+              <option value="">Select Country</option>
             </select>
-            <select name="state" className="states" id="stateId">
-                <option value="">Select State</option>
+            <select name="stateLoc" class="states" id="stateId" value={this.state.stateLoc} onChange={this.handleChange}>
+              <option value="">Select State</option>
             </select>
-            <select name="city" className="cities" id="cityId">
-                <option value="">Select City</option>
+            <select name="city" class="cities" id="cityId" value={this.state.city} onChange={this.handleChange}>
+              <option value="">Select City</option>
             </select>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-            <script src="//geodata.solutions/includes/countrystatecity.js"></script> */}
+            <script src="//geodata.solutions/includes/countrystatecity.js"></script>
             <input type="submit" value="Add"></input>
           </form>
           <hr></hr>
