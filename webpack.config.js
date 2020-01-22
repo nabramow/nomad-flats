@@ -12,7 +12,10 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   devServer: {
-    publicPath: '/build/',
+    publicPath: 'http://localhost:8080/build/',
+    proxy: {
+      '/submit': 'http://localhost:3000',
+    },
   },
   module: {
     rules: [

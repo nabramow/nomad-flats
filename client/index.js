@@ -29,7 +29,6 @@ class AddFlat extends React.Component {
     handleChange(event) {
       this.setState({
         [event.target.name]: event.target.value,
-        // enddate: event.target.value
       });
     }
   
@@ -39,22 +38,22 @@ class AddFlat extends React.Component {
         startdate: this.state.startdate,
         enddate: this.state.enddate,
       };
-      fetch("/submit", {
-        method: "POST",
+      fetch('/submit', {
+        method: 'POST',
         body: JSON.stringify(reqBody),
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         }
       })
-        // .then((res) => {
-        //   if (res.ok){
-        //     return res.json();
-        //   } else {
-        //     throw new Error ('Something went wrong with your fetch');
-        //   }
-        // }).then((json) => {
-        //   console.log(json);
-        // })
+        .then((res) => {
+          if (res.ok){
+            return res.json();
+          } else {
+            throw new Error ('Something went wrong with your fetch');
+          }
+        }).then((json) => {
+          console.log(json);
+        })
     }
 
     render() {
