@@ -140,12 +140,16 @@ class AddFlat extends React.Component {
     }
 
     handleClick(event) {
-      console.log('handleClick state ', this.state)
       this.setState({
         id: event.target.value,
       });
       // console.log(event.target.value);
       // console.log('handleClick event', event);
+      fetch('/api/delete/' + this.state.id, {
+        method: 'DELETE',
+      })
+      .then(res => res.json()) // or res.json()
+      .then(res => console.log('res in handleClick ', res))
     }
 
     render() {

@@ -7,11 +7,6 @@ flatController.getFlats = (req, res, next) => {
     if (error) {
       console.log(error.stack);
     } else {
-      console.log('made it to flatController get request!');
-      console.log('req.body ', req.body)
-      console.log('res.body ', res.body)
-      console.log('req.params ', req.params)
-      console.log('res.locals ', res.locals)
       res.locals.flats = results.rows;
       next();
     }
@@ -29,6 +24,20 @@ flatController.addFlat = (req, res, next) => {
     }
     next();
   });
+};
+
+flatController.deleteFlat = (req, res, next) => {
+  const { id } = req.params;
+  console.log('flatcontroller id req ', id);
+  const deleteQuery = 'DELETE FROM flats WHERE id = $1';
+  db.query(deleteQuery, [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    return next();
+  });
+  // console.log('delete req.params WORKS ', req.params); //nothing
+
 };
 
 module.exports = flatController;
