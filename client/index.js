@@ -147,6 +147,7 @@ class AddFlat extends React.Component {
             <p className="flatDetail"><b>Location:</b> {this.props.info.city}, {this.props.info.country}</p>
             <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
             <p className="flatDetail"><b>Contact:</b> {this.props.info.email}</p>
+            <button className="delete">DELETE</button>
           </div>
         </div>
       )

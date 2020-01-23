@@ -20,9 +20,10 @@ body {
 
 img {
   max-width: 100%;
-
 }
 
-.flat-box > .right {
-
+.delete {
+  padding: 12px;
+  background-color: #a177da;
+  color: white;
 }
