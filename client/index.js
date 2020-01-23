@@ -20,6 +20,7 @@ class AddFlat extends React.Component {
       stateloc: '',
       city: '',
       email: '',
+      flats: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,10 +54,16 @@ class AddFlat extends React.Component {
         .then(res => {
           res.json();
         })
-        // .then(res => {
-        //   this.setState({flats})
-        // })
     }
+
+    componentDidMount() {
+      fetch('/api')
+        .then(res => res.json())
+        .then((flats) => {
+        this.setState({ flats: flats });
+        })
+        .catch(err => console.log('AddFlats componentDidMount: get flats: ERROR: ', err));
+    };
 
     render() {
       console.log('AddFlats this.state ', this.state);
@@ -92,7 +99,7 @@ class AddFlat extends React.Component {
             <div id="row3"><input type="submit" value="ADD FLAT" id="add-btn"></input></div>
           </form>
           <hr></hr>
-          <Flats/>
+          <Flats flats={this.state.flats}/>
         </div>
       )
 
@@ -103,32 +110,27 @@ class AddFlat extends React.Component {
     constructor(props) {
       super(props);
       
-      this.state = {
-        flats: [],
-      };
+      // this.state = {
+      //   flats: [],
+      // };
     }
 
-    // handleDelete(id) {
-    //   const updatedFlats = this.state.flats.filter(item => item.id !== id);
-    //   this.setState({ flats: updatedFlats });
-    //  }
-
-    componentDidMount() {
-      fetch('/api')
-        .then(res => res.json())
-        .then((flats) => {
-        this.setState({ flats: flats });
-        })
-        .catch(err => console.log('Flats.componentDidMount: get flats: ERROR: ', err));
-    };
+    // componentDidMount() {
+    //   fetch('/api')
+    //     .then(res => res.json())
+    //     .then((flats) => {
+    //     this.setState({ flats: flats });
+    //     })
+    //     .catch(err => console.log('Flats.componentDidMount: get flats: ERROR: ', err));
+    // };
 
     render () {
       const flatsList = [];
       console.log('Flats this.state ', this.state);
       console.log('Flats this.props ', this.props);
       
-      for (let i = 0; i < this.state.flats.length; i += 1) {
-        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]}/>)
+      for (let i = 0; i < this.props.flats.length; i += 1) {
+        flatsList.push(<Box key={ 'flats' + i } info={this.props.flats[i]}/>)
       }
       return (
         <div id="flat-board">

@@ -15,6 +15,8 @@ module.exports = {
     publicPath: 'http://localhost:8080/build/',
     proxy: {
       '/api': 'http://localhost:3000',
+      '/delete': 'http://localhost:3000',
+      '/submit': 'http://localhost:3000',
     },
   },
   module: {
