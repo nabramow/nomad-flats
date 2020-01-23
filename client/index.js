@@ -22,8 +22,10 @@ class AddFlat extends React.Component {
       startdate: '',
       enddate: '',
       country: '',
-      stateLoc: '',
-      city: ''
+      stateloc: '',
+      city: '',
+      email: '',
+      flats: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,10 +43,11 @@ class AddFlat extends React.Component {
         startdate: this.state.startdate,
         enddate: this.state.enddate,
         country: this.state.country,
-        stateLoc: this.state.stateLoc,
-        city: this.state.city
+        stateloc: this.state.stateloc,
+        city: this.state.city,
+        email: this.state.email
       };
-      fetch('/submit', {
+      fetch('/api/submit', {
         method: 'POST',
         body: JSON.stringify(reqBody),
         headers: {
@@ -63,26 +66,25 @@ class AddFlat extends React.Component {
     }
 
     render() {
-      console.log('AddFlats this.state ', this.state);
-      console.log('AddFlats this.props ', this.props);
       return (
         <div id="add-form">
           <h2>Add a flat</h2>
           <br></br>
           <form onSubmit={this.handleSubmit}>
-            <label for="startdate">Start date:</label>
+            <label htmlFor="startdate">Start date:</label>
             <input type="date" name="startdate" value={this.state.startdate} onChange={this.handleChange}></input>
-            <label for="enddate">End date:</label>
+            <label htmlFor="enddate">End date:</label>
             <input type="date" name="enddate" value={this.state.enddate} onChange={this.handleChange}></input>
             <select name="country" className="countries" id="countryId" value={this.state.country} onChange={this.handleChange}>
               <option value="">Select Country</option>
             </select>
-            <select name="stateLoc" class="states" id="stateId" value={this.state.stateLoc} onChange={this.handleChange}>
+            <select name="stateloc" className="states" id="stateId" value={this.state.stateloc} onChange={this.handleChange}>
               <option value="">Select State</option>
             </select>
-            <select name="city" class="cities" id="cityId" value={this.state.city} onChange={this.handleChange}>
+            <select name="city" className="cities" id="cityId" value={this.state.city} onChange={this.handleChange}>
               <option value="">Select City</option>
             </select>
+            <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange}></input>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
             <script src="//geodata.solutions/includes/countrystatecity.js"></script>
             <input type="submit" value="Add"></input>
@@ -94,12 +96,36 @@ class AddFlat extends React.Component {
     }
   }
 
-  class ViewFlats extends React.Component {
+  class Flats extends React.Component {
+    constructor(props) {
+      super(props);
+      
+      this.state = {
+        flats: [],
+      };
+    }
+
+    componentDidMount() {
+      console.log('component mounted');
+      fetch('/')
+        .then(res => res.json())
+        .then((flats) => {
+  
+          if (!Array.isArray(flats)) flats = [];
+          this.setState({ flats: flats });
+          console.log('flats', flats)
+        })
+        .catch(err => console.log('Flats.componentDidMount: get flats: ERROR: ', err));
+    };
+
     render () {
+      console.log('Flats this.state ', this.state);
+      console.log('Flats this.props ', this.props);
+      
       return (
         <div>hello!</div>
       )
     }
   }
   ReactDOM.render(<AddFlat />, document.getElementById('flats'));
-  ReactDOM.render(<ViewFlats />, document.getElementById('view-flats'));
+  ReactDOM.render(<Flats />, document.getElementById('view-flats'));

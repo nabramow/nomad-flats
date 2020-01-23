@@ -13,15 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // route handler
-app.post('/submit', (req, res) => {
-  console.log('made it to app.post upon submit!');
-  console.log('app.post req.body.startdate ', req.body);
-  // res.send(req.body.username);
-});
-
-app.get('/flats', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/flats.html'));
-});
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
