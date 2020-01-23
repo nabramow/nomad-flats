@@ -102,7 +102,7 @@ class AddFlat extends React.Component {
     }
 
     componentDidMount() {
-      console.log('component mounted');
+      // console.log('component mounted');
       fetch('/api')
         .then(res => res.json())
         .then((flats) => {
@@ -119,7 +119,7 @@ class AddFlat extends React.Component {
       console.log('Flats this.props ', this.props);
       
       for (let i = 0; i < this.state.flats.length; i += 1) {
-        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]} flatId={this.state.flats.id}/>)
+        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]}/>)
       }
       return (
         <div id="flat-board">
@@ -132,10 +132,25 @@ class AddFlat extends React.Component {
   class Box extends React.Component {
     constructor(props) {
       super(props);
+      this.state = {
+        id: ''
+      };
+      this.handleClick= this.handleClick.bind(this);
+
     }
+
+    handleClick(event) {
+      console.log('handleClick state ', this.state)
+      this.setState({
+        id: event.target.value,
+      });
+      // console.log(event.target.value);
+      // console.log('handleClick event', event);
+    }
+
     render() {
-      // console.log('Box this.state ', this.state);
-      // console.log('Box this.props ', this.props);
+      console.log('Box this.state ', this.state);
+      console.log('Box this.props ', this.props);
       return (
         <div className="flat-box">
           <div className="left">
@@ -147,7 +162,7 @@ class AddFlat extends React.Component {
             <p className="flatDetail"><b>Location:</b> {this.props.info.city}, {this.props.info.country}</p>
             <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
             <p className="flatDetail"><b>Contact:</b> {this.props.info.email}</p>
-            <button className="delete">DELETE</button>
+            <button name="delete" className="delete" value={this.props.info.id} onClick={this.handleClick}>DELETE</button>
           </div>
         </div>
       )
