@@ -3,17 +3,16 @@ const flatController = require('../controllers/flatController.js');
 
 const router = express.Router();
 
-router.get('/', flatController.getFlats, (req, res, next) => {
-  console.log('made it to router get request!');
-  console.log('res.locals.flats ', res.locals.flats);
+router.get('/', flatController.getFlats, (req, res) => {
+  // console.log('made it to router get request!');
   res.json(res.locals.flats);
-  next();
+  // next is causing some header issue "Cannot set headers after they are sent to the client" so uncommented
+  // next();
 });
 
 router.post('/submit',
   flatController.addFlat, (req, res, next) => {
-    console.log('made it to router post!')
-    next()
+    next();
   });
 
 

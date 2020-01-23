@@ -7,7 +7,11 @@ flatController.getFlats = (req, res, next) => {
     if (error) {
       console.log(error.stack);
     } else {
-      console.log('res.locals ', res.locals);
+      console.log('made it to flatController get request!');
+      console.log('req.body ', req.body)
+      console.log('res.body ', res.body)
+      console.log('req.params ', req.params)
+      console.log('res.locals ', res.locals)
       res.locals.flats = results.rows;
       next();
     }

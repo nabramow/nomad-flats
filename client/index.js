@@ -2,22 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 
-const title = 'Homepage with login';
+const title = 'Medium-term accommodation by nomads, for nomads.';
 
 ReactDOM.render(
-  <div>
+  <div id = "title">
   {title}
-  <p>
-    <a href="./flats">Click here to view flats.</a>
-  </p>
   <hr></hr>
   </div>,
   document.getElementById('app')
 );
 
 class AddFlat extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       startdate: '',
       enddate: '',
@@ -50,9 +47,6 @@ class AddFlat extends React.Component {
       fetch('/api/submit', {
         method: 'POST',
         body: JSON.stringify(reqBody),
-        headers: {
-          'Content-Type': 'application/json'
-        }
       })
         .then((res) => {
           if (res.ok){
@@ -75,7 +69,7 @@ class AddFlat extends React.Component {
             <input type="date" name="startdate" value={this.state.startdate} onChange={this.handleChange}></input>
             <label htmlFor="enddate">End date:</label>
             <input type="date" name="enddate" value={this.state.enddate} onChange={this.handleChange}></input>
-            <select name="country" className="countries" id="countryId" value={this.state.country} onChange={this.handleChange}>
+            {/* <select name="country" className="countries" id="countryId" value={this.state.country} onChange={this.handleChange}>
               <option value="">Select Country</option>
             </select>
             <select name="stateloc" className="states" id="stateId" value={this.state.stateloc} onChange={this.handleChange}>
@@ -83,7 +77,7 @@ class AddFlat extends React.Component {
             </select>
             <select name="city" className="cities" id="cityId" value={this.state.city} onChange={this.handleChange}>
               <option value="">Select City</option>
-            </select>
+            </select> */}
             <input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange}></input>
             <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
             <script src="//geodata.solutions/includes/countrystatecity.js"></script>
@@ -107,25 +101,51 @@ class AddFlat extends React.Component {
 
     componentDidMount() {
       console.log('component mounted');
-      fetch('/')
+      fetch('/api')
         .then(res => res.json())
         .then((flats) => {
   
           if (!Array.isArray(flats)) flats = [];
           this.setState({ flats: flats });
-          console.log('flats', flats)
         })
         .catch(err => console.log('Flats.componentDidMount: get flats: ERROR: ', err));
     };
 
     render () {
+      const flatsList = [];
       console.log('Flats this.state ', this.state);
       console.log('Flats this.props ', this.props);
       
+      for (let i = 0; i < this.state.flats.length; i += 1) {
+        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]}/>)
+      }
       return (
-        <div>hello!</div>
+        <div id="flat-board">
+          {flatsList}
+        </div>
       )
     }
   }
+
+  class Box extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      // console.log('Box this.state ', this.state);
+      // console.log('Box this.props ', this.props);
+      return (
+        <div className="flat-box">
+          <p className="flatDetail"><b>Start Date:</b> {this.props.info.startdate}</p>
+          <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
+          <p className="flatDetail"><b>Location:</b> {this.props.info.city}, {this.props.info.country}</p>
+          <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
+          <p className="flatDetail"><b>Contact:</b> {this.props.info.email}</p>
+
+        </div>
+      )
+    }
+  }
+
   ReactDOM.render(<AddFlat />, document.getElementById('flats'));
   ReactDOM.render(<Flats />, document.getElementById('view-flats'));
