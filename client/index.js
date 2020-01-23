@@ -16,6 +16,7 @@ class AddFlat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       startdate: '',
       enddate: '',
       country: '',
@@ -37,6 +38,7 @@ class AddFlat extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       let reqBody = {
+        id: this.state.id,
         startdate: this.state.startdate,
         enddate: this.state.enddate,
         country: this.state.country,
@@ -117,7 +119,7 @@ class AddFlat extends React.Component {
       console.log('Flats this.props ', this.props);
       
       for (let i = 0; i < this.state.flats.length; i += 1) {
-        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]}/>)
+        flatsList.push(<Box key={ 'flats' + i } info={this.state.flats[i]} flatId={this.state.flats.id}/>)
       }
       return (
         <div id="flat-board">
@@ -136,12 +138,16 @@ class AddFlat extends React.Component {
       // console.log('Box this.props ', this.props);
       return (
         <div className="flat-box">
-          <p className="flatDetail"><b>Start Date:</b> {this.props.info.startdate}</p>
-          <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
-          <p className="flatDetail"><b>Location:</b> {this.props.info.city}, {this.props.info.country}</p>
-          <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
-          <p className="flatDetail"><b>Contact:</b> {this.props.info.email}</p>
-
+          <div className="left">
+            <img src="../client/assets/home.png"></img>
+          </div>
+          <div className="right">
+            <p className="flatDetail"><b>Start Date:</b> {this.props.info.startdate}</p>
+            <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
+            <p className="flatDetail"><b>Location:</b> {this.props.info.city}, {this.props.info.country}</p>
+            <p className="flatDetail"><b>End Date:</b> {this.props.info.enddate}</p>
+            <p className="flatDetail"><b>Contact:</b> {this.props.info.email}</p>
+          </div>
         </div>
       )
     }
