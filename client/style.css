@@ -1,19 +1,65 @@
+#hero {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  background-color: white;
-}
-
-#title {
-  margin: 0 auto;
-}
-
-.flat-box {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 50px;
   display: flex;
-  background-color: white;
-  padding: 10px;
-  margin: 20px;
-  box-shadow: 0px 0px 5px 5px #ececec;
+  flex-direction: column;
 }
 
+form {
+  margin-bottom: 20px;
+  background-color: #ececec;
+  box-shadow: 0 0 5px #b4b4b4;
+  padding: 20px;
+}
+
+input.add-inputs  {
+  padding: 15px;
+  margin: 20px;
+}
+
+#row1 {
+  display: flex;
+  width: 100%;
+}
+
+#row2 {
+  width: 100%;
+  font-size: medium;
+}
+
+#row2 > select {
+  margin: 10px;
+  padding: 20px;
+  height: 20px;
+  font-size: medium;
+}
+
+input#add-btn {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #a177da;
+  color: white;
+  width: 100%;
+  border-radius: 0;
+  font-size: medium;
+}
+
+div.flat-box {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  background-color: #ececec;
+  padding: 10px;
+  box-shadow: 0 0 5px #b4b4b4;
+}
+.right {
+  width: 100%;
+}
 .flat-box > div {
   padding: 20px;
 }
@@ -26,4 +72,6 @@ img {
   padding: 12px;
   background-color: #a177da;
   color: white;
+  width: 100%;
+  font-size: medium;
 }

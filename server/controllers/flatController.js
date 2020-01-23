@@ -28,16 +28,13 @@ flatController.addFlat = (req, res, next) => {
 
 flatController.deleteFlat = (req, res, next) => {
   const { id } = req.params;
-  console.log('flatcontroller id req ', id);
   const deleteQuery = 'DELETE FROM flats WHERE id = $1';
   db.query(deleteQuery, [id], (error, results) => {
     if (error) {
       throw error;
     }
-    return next();
+    next();
   });
-  // console.log('delete req.params WORKS ', req.params); //nothing
-
 };
 
 module.exports = flatController;
